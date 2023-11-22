@@ -2,16 +2,26 @@ using UnityEngine;
 
 namespace StinkySteak.NetcodeBenchmark
 {
-    public class SinRandomMove
+    public struct SinRandomMoveWrapper
     {
-        [SerializeField] private float _minSpeed = 1;
-        [SerializeField] private float _maxSpeed = 1;
-        [SerializeField] private float _amplitude = 1;
+        [SerializeField] private float _minSpeed;
+        [SerializeField] private float _maxSpeed;
+        [SerializeField] private float _amplitude;
 
         private Vector3 _targetPosition;
         private Vector3 _initialPosition;
 
         private float _speed;
+
+        public static SinRandomMoveWrapper CreateDefault()
+        {
+            SinRandomMoveWrapper wrapper = new();
+            wrapper._minSpeed = 1f;
+            wrapper._maxSpeed = 1f;
+            wrapper._amplitude = 1f;
+
+            return wrapper;
+        }
 
         public void NetworkStart()
         {
