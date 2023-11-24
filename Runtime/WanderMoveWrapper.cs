@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace StinkySteak.NetcodeBenchmark
 {
+    [System.Serializable]
     public struct WanderMoveWrapper
     {
         [SerializeField] private float _circleRadius;

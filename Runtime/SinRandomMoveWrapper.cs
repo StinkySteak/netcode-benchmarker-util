@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace StinkySteak.NetcodeBenchmark
 {
+    [System.Serializable]
     public struct SinRandomMoveWrapper
     {
         [SerializeField] private float _minSpeed;
