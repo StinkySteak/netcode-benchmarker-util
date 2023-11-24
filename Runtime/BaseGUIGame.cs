@@ -16,6 +16,11 @@ namespace StinkySteak.NetcodeBenchmark
 
         private void Start()
         {
+            Initialize();
+        }
+
+        protected virtual void Initialize()
+        {
             _buttonStartServer.onClick.AddListener(StartServer);
             _buttonStartClient.onClick.AddListener(StartClient);
         }
