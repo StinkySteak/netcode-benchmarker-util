@@ -15,13 +15,13 @@ namespace StinkySteak.NetcodeBenchmark
         private SimulationTimer.SimulationTimer _timerUpdateLatencyText;
 
         [Header("Stress Test 1: Move Y")]
-        [SerializeField] private StressTestEssential _test_1;
+        [SerializeField] protected StressTestEssential _test_1;
 
         [Header("Stress Test 2: Move All Axis")]
-        [SerializeField] private StressTestEssential _test_2;
+        [SerializeField] protected StressTestEssential _test_2;
 
         [Header("Stress Test 3: Move Wander")]
-        [SerializeField] private StressTestEssential _test_3;
+        [SerializeField] protected StressTestEssential _test_3;
 
         [System.Serializable]
         public struct StressTestEssential
