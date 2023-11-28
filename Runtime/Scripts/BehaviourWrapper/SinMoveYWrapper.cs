@@ -3,7 +3,7 @@ using UnityEngine;
 namespace StinkySteak.NetcodeBenchmark
 {
     [System.Serializable]
-    public struct SinMoveYWrapper
+    public struct SinMoveYWrapper : IMoveWrapper
     {
         [SerializeField] private float _minSpeed;
         [SerializeField] private float _maxSpeed;
@@ -28,7 +28,7 @@ namespace StinkySteak.NetcodeBenchmark
             return wrapper;
         }
 
-        public void NetworkStart()
+        public void NetworkStart(Transform transform)
         {
             _speed = Random.Range(_minSpeed, _maxSpeed);
             _amplitude = Random.Range(_minAmplitude, _maxAmplitude);

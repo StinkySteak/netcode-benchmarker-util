@@ -3,7 +3,7 @@ using UnityEngine;
 namespace StinkySteak.NetcodeBenchmark
 {
     [System.Serializable]
-    public struct WanderMoveWrapper
+    public struct WanderMoveWrapper : IMoveWrapper
     {
         [SerializeField] private float _circleRadius;
         [SerializeField] private float _turnChance;
@@ -12,6 +12,8 @@ namespace StinkySteak.NetcodeBenchmark
         [SerializeField] private float _mass;
         [SerializeField] private float _maxSpeed;
         [SerializeField] private float _maxForce;
+
+        [SerializeField] private float _maxSpawnPositionRadius;
 
         private Vector3 _velocity;
         private Vector3 _wanderForce;
@@ -30,10 +32,20 @@ namespace StinkySteak.NetcodeBenchmark
             return data;
         }
 
-        public void NetworkStart()
+        public void NetworkStart(Transform transform)
         {
             _velocity = Random.onUnitSphere;
             _wanderForce = GetRandomWanderForce();
+            transform.position = GetRandomSpawnPosition();
+        }
+
+        private Vector3 GetRandomSpawnPosition()
+        {
+            float x = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
+            float y = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
+            float z = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
+
+            return new Vector3(x, y, z);
         }
 
         public void NetworkUpdate(Transform transform)
