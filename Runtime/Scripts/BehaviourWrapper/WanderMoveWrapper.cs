@@ -36,16 +36,7 @@ namespace StinkySteak.NetcodeBenchmark
         {
             _velocity = Random.onUnitSphere;
             _wanderForce = GetRandomWanderForce();
-            transform.position = GetRandomSpawnPosition();
-        }
-
-        private Vector3 GetRandomSpawnPosition()
-        {
-            float x = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
-            float y = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
-            float z = Random.Range(-_maxSpawnPositionRadius, _maxSpawnPositionRadius);
-
-            return new Vector3(x, y, z);
+            transform.position = RandomVector3.Get(_maxSpawnPositionRadius);
         }
 
         public void NetworkUpdate(Transform transform)

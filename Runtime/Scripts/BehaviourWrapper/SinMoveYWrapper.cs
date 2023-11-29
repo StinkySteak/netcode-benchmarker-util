@@ -9,7 +9,7 @@ namespace StinkySteak.NetcodeBenchmark
         [SerializeField] private float _maxSpeed;
         [SerializeField] private float _minAmplitude;
         [SerializeField] private float _maxAmplitude;
-        [SerializeField] private float _randomMultiplier;
+        [SerializeField] private float _positionMaxRandom;
 
         private Vector3 _initialPosition;
 
@@ -23,7 +23,7 @@ namespace StinkySteak.NetcodeBenchmark
             wrapper._maxSpeed = 1f;
             wrapper._minAmplitude = 0.5f;
             wrapper._maxAmplitude = 1f;
-            wrapper._randomMultiplier = 5f;
+            wrapper._positionMaxRandom = 5f;
 
             return wrapper;
         }
@@ -32,16 +32,7 @@ namespace StinkySteak.NetcodeBenchmark
         {
             _speed = Random.Range(_minSpeed, _maxSpeed);
             _amplitude = Random.Range(_minAmplitude, _maxAmplitude);
-            _initialPosition = GenerateRandomPosition();
-        }
-
-        private Vector3 GenerateRandomPosition()
-        {
-            return new Vector3(
-                Random.Range(-1f, 1f),
-                Random.Range(-1f, 1f),
-                Random.Range(-1f, 1f)
-                ) * _randomMultiplier;
+            _initialPosition = RandomVector3.Get(_positionMaxRandom);
         }
 
         public void NetworkUpdate(Transform transform)
