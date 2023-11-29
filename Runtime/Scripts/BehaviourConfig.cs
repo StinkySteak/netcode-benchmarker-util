@@ -5,30 +5,41 @@ namespace StinkySteak.NetcodeBenchmark
     [CreateAssetMenu(fileName = nameof(BehaviourConfig), menuName = "Netcode Benchmark/Behaviour Config")]
     public class BehaviourConfig : ScriptableObject
     {
-        [SerializeField] private SinMoveYWrapper _sinYMove;
-        [SerializeField] private SinRandomMoveWrapper _sinAllAxisMove;
-        [SerializeField] private WanderMoveWrapper _wanderMove;
+        [SerializeField] private MoveBehaviour _moveBehaviour;
+
+        [System.Serializable]
+        public struct MoveBehaviour
+        {
+            public SinMoveYWrapper SinYMove;
+            public SinRandomMoveWrapper SinAllAxisMove;
+            public WanderMoveWrapper WanderMove;
+
+            public void CreateDefault()
+            {
+                SinYMove = SinMoveYWrapper.CreateDefault();
+                SinAllAxisMove = SinRandomMoveWrapper.CreateDefault();
+                WanderMove = WanderMoveWrapper.CreateDefault();
+            }
+        }
 
         private void Reset()
         {
-            _sinYMove = SinMoveYWrapper.CreateDefault();
-            _sinAllAxisMove = SinRandomMoveWrapper.CreateDefault();
-            _wanderMove = WanderMoveWrapper.CreateDefault();
+            _moveBehaviour.CreateDefault();
         }
 
         public void ApplyConfig(ref SinMoveYWrapper wrapper)
         {
-            wrapper = _sinYMove;
+            wrapper = _moveBehaviour.SinYMove;
         }
 
         public void ApplyConfig(ref SinRandomMoveWrapper wrapper)
         {
-            wrapper = _sinAllAxisMove;
+            wrapper = _moveBehaviour.SinAllAxisMove;
         }
 
         public void ApplyConfig(ref WanderMoveWrapper wrapper)
         {
-            wrapper = _wanderMove;
+            wrapper = _moveBehaviour.WanderMove;
         }
     }
 }
